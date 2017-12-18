@@ -6,7 +6,6 @@ In this section we modify the <<_social_login_manual,app>> we built already, add
 == Adding the Github Link
 
 In the client the change is trivial, we just add another link:
-
 .index.html
 [source,html]
 ----
