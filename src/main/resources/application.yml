@@ -1,0 +1,22 @@
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://client:secret@localhost:8080/oauth2/token
+      user-authorization-uri: http://localhost:8080/oauth2/authorize
+#      tokenName: token
+#      authenticationScheme: query
+#      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: http://localhost:8080/user
+
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+server:
+  port: 8850  
+  tomcat:
+    uri-encoding: UTF-8
