@@ -44,11 +44,18 @@ public class SocialApplication  {
 	}
 
 	
-	@RequestMapping({ "/user", "/me" })
+	@RequestMapping( "/user")
 	public Map<String, String> user(Principal principal) {
 		Map<String, String> map = new LinkedHashMap<>();
 		map.put("name", principal.getName());
 		return map;
+	}
+	
+	@RequestMapping( "/me" )
+	public Map<String, String> me() {
+	    Map<String, String> map = new LinkedHashMap<>();
+	    map.put("name", "123");
+	    return map;
 	}
 	
 	@RequestMapping("/index")

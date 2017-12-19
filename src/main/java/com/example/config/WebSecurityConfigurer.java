@@ -15,68 +15,53 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableOAuth2Sso
-public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter{
-	
-	
-
-
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-	    http.csrf().disable().headers().disable();
-	    
-	    http.authorizeRequests().anyRequest().fullyAuthenticated();
-		// @formatter:off
-		http.authorizeRequests().antMatchers("/login**", "/webjars/**").permitAll()
-			.and()
-			.authorizeRequests().anyRequest().authenticated()
-//			.and().formLogin().loginPage("http://localhost:8080/oauth/authorize").permitAll()
-//			.exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/"))
-			.and()
-//			.addFilterBefore(oauth2ClientAuthenticationProcessingFilter(),BasicAuthenticationFilter.class)
-			
-			.logout()
-			.logoutSuccessUrl("/").permitAll();
-//			.and()
-//			.csrf().csrfTokenRepository(csrfTokenRepository());
-//			.and()
-//			.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
-//			.addFilterBefore(new JWTAuthenticationFilter(),
-//                    UsernamePasswordAuthenticationFilter.class);
-		// @formatter:on
-	}
-
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/js/**","/css/**","/images/**");
-	}
-
-
-	private CsrfTokenRepository csrfTokenRepository(){
-		HttpSessionCsrfTokenRepository csrfTokenRepository = new HttpSessionCsrfTokenRepository();
-		csrfTokenRepository.setHeaderName("X-XSRF-TOKEN");
-		return csrfTokenRepository;
-	}
-
-	
-  @Override
-  @Bean
-  public AuthenticationManager authenticationManagerBean() throws Exception {
-      return super.authenticationManagerBean();
-  }
-  
-//  @Bean
-//  public OAuth2ClientAuthenticationProcessingFilter oauth2ClientAuthenticationProcessingFilter() {
-//      return new OAuth2ClientAuthenticationProcessingFilter("");
-//  }
-  
+public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
+    
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable().headers().disable();
+        
+        // http.authorizeRequests().anyRequest().fullyAuthenticated();
+        // @formatter:off
+        http.authorizeRequests().antMatchers("/login**", "/webjars/**", "/me").permitAll().and().authorizeRequests()
+                .anyRequest().authenticated()
+                // .and().formLogin().loginPage("http://localhost:8080/oauth/authorize").permitAll()
+                // .exceptionHandling().authenticationEntryPoint(new
+                // LoginUrlAuthenticationEntryPoint("/"))
+                .and()
+                // .addFilterBefore(oauth2ClientAuthenticationProcessingFilter(),BasicAuthenticationFilter.class)
+                
+                .logout().logoutSuccessUrl("/").permitAll();
+        // .and()
+        // .csrf().csrfTokenRepository(csrfTokenRepository());
+        // .and()
+        // .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+        // .addFilterBefore(new JWTAuthenticationFilter(),
+        // UsernamePasswordAuthenticationFilter.class);
+        // @formatter:on
+    }
+    
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/js/**", "/css/**", "/images/**");
+    }
+    
+    private CsrfTokenRepository csrfTokenRepository() {
+        HttpSessionCsrfTokenRepository csrfTokenRepository = new HttpSessionCsrfTokenRepository();
+        csrfTokenRepository.setHeaderName("X-XSRF-TOKEN");
+        return csrfTokenRepository;
+    }
+    
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+    
+    // @Bean
+    // public OAuth2ClientAuthenticationProcessingFilter
+    // oauth2ClientAuthenticationProcessingFilter() {
+    // return new OAuth2ClientAuthenticationProcessingFilter("");
+    // }
+    
 }
-
-
-
-
-
-
-
-
-
-

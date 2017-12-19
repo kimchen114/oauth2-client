@@ -10,36 +10,26 @@ import org.springframework.security.oauth2.client.token.grant.code.Authorization
 
 import feign.RequestInterceptor;
 
-//@Configuration
+// @Configuration
 public class FeignConfiguration {
-
-	@Autowired
-	private CustomOauth2ClientContext customOauth2ClientContext;
-	
-	@Bean
-	@Profile("dev")
-	public  RequestInterceptor oauth2RequestInterceptorDev (OAuth2ClientContext oauth2ClientContext) {
-		return new Oauth2RequestInterceptor(oauth2ClientContext,customOauth2ClientContext,resource());
-	}
-	
-	@Bean
-	public OAuth2ProtectedResourceDetails resource(){
-		AuthorizationCodeResourceDetails resource= new AuthorizationCodeResourceDetails();
-		resource.setAccessTokenUri("http://localhost:8080/oauth/token");
-		resource.setClientId("client");
-		resource.setClientSecret("secret");
-		resource.setUserAuthorizationUri("http://localhost:8080/oauth/authorize");
-		return resource;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    
+    @Autowired
+    private CustomOauth2ClientContext customOauth2ClientContext;
+    
+    @Bean
+    @Profile("dev")
+    public RequestInterceptor oauth2RequestInterceptorDev(OAuth2ClientContext oauth2ClientContext) {
+        return new Oauth2RequestInterceptor(oauth2ClientContext, customOauth2ClientContext, resource());
+    }
+    
+    @Bean
+    public OAuth2ProtectedResourceDetails resource() {
+        AuthorizationCodeResourceDetails resource = new AuthorizationCodeResourceDetails();
+        resource.setAccessTokenUri("http://localhost:8080/oauth/token");
+        resource.setClientId("client");
+        resource.setClientSecret("secret");
+        resource.setUserAuthorizationUri("http://localhost:8080/oauth/authorize");
+        return resource;
+    }
+    
 }
