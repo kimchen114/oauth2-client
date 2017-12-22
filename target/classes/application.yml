@@ -3,8 +3,8 @@ security:
     client:
       client-id: client
       client-secret: secret
-      access-token-uri: http://client:secret@localhost:8080/oauth2/token
-      user-authorization-uri: http://localhost:8080/oauth2/authorize
+      access-token-uri: http://client:secret@localhost:8080/oauth/token
+      user-authorization-uri: http://localhost:8080/oauth/authorize
 #      tokenName: token
 #      authenticationScheme: query
 #      clientAuthenticationScheme: form
